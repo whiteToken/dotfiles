@@ -37,9 +37,6 @@ set backspace=2
 " Line Numbers PWN!
 set number
 
-" This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
-inoremap jj <Esc>
-
 set hidden
 "nnoremap JJJJ <Nop>
 
@@ -56,6 +53,8 @@ color mustang
 " }}}
 
 "{{{ Mappings
+
+inoremap jj <Esc>
 
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
