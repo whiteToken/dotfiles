@@ -1,4 +1,5 @@
 #!/bin/bash
+# copy files for per user vim config
 
 cp -v .vimrc ~/
 cp -rv .vim ~/
