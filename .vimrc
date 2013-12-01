@@ -135,3 +135,6 @@ syntax on
 "snipMate ("paste snippets of code based off a keyword, reduces boilerplate code)
 "OmniCppComplete ('Intellisense')
 "supertab (for determining what completion to use given the current cursor context)
+"
+"not related to vim but this is good
+"http://xexpanderx.deviantart.com/journal/The-Witcher-2-Enhanced-Edition-GOG-on-GNU-Linux-306747442
