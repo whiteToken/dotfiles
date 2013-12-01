@@ -58,9 +58,9 @@ inoremap jj <Esc>
 
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
-nnoremap <F3> :w<CR>
+nnoremap <F3> :w
 nnoremap <F2> :q!
-nnoremap <F1> :wa<CR>
+nnoremap <F1> :wa
 
 nnoremap <Leader>s :source ~/.vimrc<CR>
 nnoremap <Leader>e :tabe ~/.vimrc<CR>
