@@ -97,8 +97,8 @@ nnoremap <Right> gt
 
 " move lines
 
-nnoremap <Up> ddkP
-nnoremap <Down> ddp
+"nnoremap <Up> ddkP
+"nnoremap <Down> ddp
 
 " quick surroundings
 
@@ -136,3 +136,5 @@ syntax on
 "
 "not related to vim but this is good
 "http://xexpanderx.deviantart.com/journal/The-Witcher-2-Enhanced-Edition-GOG-on-GNU-Linux-306747442
+"
+"this is cool map * /\<<C-R>=expand('<cword>')<CR>\><CR>
