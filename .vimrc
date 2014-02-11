@@ -54,6 +54,8 @@ color mustang
 
 "{{{ Mappings
 
+nnoremap <Leader>6 ^
+
 inoremap jj <Esc>
 
 nnoremap <F5> :buffers<CR>:buffer<Space>
@@ -67,7 +69,7 @@ nnoremap / :set hls<CR> /
 nnoremap <F4> :set nohls<CR>
 
 nnoremap gb gT
-nnoremap <C-t> :tabnew<CR>
+nnoremap <Leader>t :tabnew<CR>
 
 nnoremap <Space> za
 
