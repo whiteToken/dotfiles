@@ -2,16 +2,27 @@
 # copy files for per user vim config
 
 if [ ! $# -eq 0 ]; then
-    cp -v .vimrc ~/
-    cp -rv .vim ~/
-    cp -rv .fonts ~/
-    mkdir -pv ~/.config/fontconfig/conf.d
-    cp -v 10-powerline-symbols.conf ~/.config/fontconfig/conf.d
+    if [ $1 == "-u" ]; then
+        cp -v .vimrc ~/
+        cp -rv .vim ~/
+        cp -rv .fonts ~/
+        mkdir -pv ~/.config/fontconfig/conf.d
+        cp -v 10-powerline-symbols.conf ~/.config/fontconfig/conf.d
+    fi
 
+    if [ $1 == "-r" ]; then
+        cp -v .vimrcRoot ~/.vimrc
+    fi
 
     if [ $1 == "-i" ]; then
         git clone https://github.com/bling/vim-airline ~/.vim/bundle/vim-airline
         git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
+        cp -v .vimrc ~/
+        cp -rv .vim ~/
+        cp -rv .fonts ~/
+        mkdir -pv ~/.config/fontconfig/conf.d
+        cp -v 10-powerline-symbols.conf ~/.config/fontconfig/conf.d
+
     fi
     if [ $1 == "-g" ]; then
         git pull https://github.com/bling/vim-airline ~/.vim/bundle/vim-airline
@@ -22,5 +33,6 @@ if [ ! $# -eq 0 ]; then
 else
     echo "-i for initial install"
     echo "-g for update with git"
-    echo "-u for update with out git" #anything but -i or -g will do
+    echo "-u for update with out git"
+    echo "-r for beter root user config"
 fi
