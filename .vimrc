@@ -184,12 +184,38 @@ set pumheight=20
 
 " }}}
 
+"{{{  C++ code editing functions
+
+" open cpp and h file for a class in verticle windows
+
+" cant get this to work because find in the function reads everything literaly
+function! OpenFile()
+
+    let s:f = expand("%:t:r.h")
+    vs
+    e tmp
+    echo s:f
+
+endfunction
+
+"nnoremap ,h :call OpenFile()<CR>
+nnoremap ,h :vs<CR>:find %:t:r.h<CR>
+
+"}}}
+
 "{{{ Mappings
+
+nnoremap ] ]c
+nnoremap [ [c
 
 nnoremap <Leader>6 ^
 nnoremap <Leader>4 $
 
 inoremap jj <Esc>
+inoremap <C-BS> <C-w>
+
+nnoremap dl ^d$
+nnoremap -- $
 
 nnoremap <F4> :buffers<CR>:buffer<Space>
 
@@ -197,6 +223,8 @@ nnoremap <F2> :q!
 
 nnoremap <Leader>s :source ~/.vimrc<CR>
 nnoremap <Leader>e :tabe ~/.vimrc<CR>
+
+vnoremap <Leader>v <C-v>I
 
 nnoremap / :set hls<CR> /
 nnoremap <F3> :set nohls<CR>
@@ -267,6 +295,7 @@ set ttm=50
 
 "}}}
 
+"{{{ Junk stuff
 filetype plugin indent on
 syntax on
 
@@ -307,5 +336,5 @@ syntax on
 "let g:clang_complete_copen = 1
 "
 ""###################################
-
+"}}}
 
