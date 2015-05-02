@@ -203,10 +203,25 @@ nnoremap ,h :vs<CR>:find %:t:r.h<CR>
 
 "}}}
 
+"{{{ GLSL Shader syntax highlight
+
+au BufEnter *.fs set ft=c
+au BufEnter *.vs set ft=c
+au BufEnter *.fs set syntax=c
+au BufEnter *.vs set syntax=c
+
+"au BufRead s:setGLSLsyntax()
+
+""}}}
+
 "{{{ Mappings
 
-nnoremap ] ]c
-nnoremap [ [c
+vnoremap <Leader>q :g//exe 'norm @a'<CR>
+
+nnoremap <Leader>d :%s/\s\+$//<CR>
+
+nnoremap <Leader><F5> :set spell<CR>
+nnoremap <Leader><F6> :set nospell<CR>
 
 nnoremap <Leader>6 ^
 nnoremap <Leader>4 $
@@ -215,7 +230,7 @@ inoremap jj <Esc>
 inoremap <C-BS> <C-w>
 
 nnoremap dl ^d$
-nnoremap -- $
+"nnoremap --
 
 nnoremap <F4> :buffers<CR>:buffer<Space>
 
@@ -227,6 +242,7 @@ nnoremap <Leader>e :tabe ~/.vimrc<CR>
 vnoremap <Leader>v <C-v>I
 
 nnoremap / :set hls<CR> /
+nnoremap * :set hls<CR> *
 nnoremap <F3> :set nohls<CR>
 
 nnoremap gb gT
@@ -250,7 +266,7 @@ nnoremap : ;
 
 " c make comands
 
-nnoremap <F9> :make tags<CR>
+nnoremap <F9> :!ctags -R *<CR>
 nnoremap <F8> :make run<CR>
 nnoremap <F7> :wa<CR>:make<CR>
 nnoremap <F6> :cn<CR>
