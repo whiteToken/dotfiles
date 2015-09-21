@@ -5,7 +5,7 @@ if [ ! $# -eq 0 ]; then
     if [ $1 == "-u" ]; then
         cp -v .vimrc ~/
         cp -rv .vim ~/
-        cp -rv .fonts ~/
+        cp -rv .fonts ~/.local/share/fonts
         mkdir -pv ~/.config/fontconfig/conf.d
         cp -v 10-powerline-symbols.conf ~/.config/fontconfig/conf.d
     fi
@@ -18,9 +18,10 @@ if [ ! $# -eq 0 ]; then
         git clone https://github.com/bling/vim-airline ~/.vim/bundle/vim-airline
         git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
         git clone https://github.com/rust-lang/rust.vim.git
+        git clone https://github.com/phildawes/racer.git
         cp -v .vimrc ~/
         cp -rv .vim ~/
-        cp -rv .fonts ~/
+        cp -rv .fonts ~/.local/share/fonts
         mkdir -pv ~/.config/fontconfig/conf.d
         cp -v 10-powerline-symbols.conf ~/.config/fontconfig/conf.d
 
@@ -29,6 +30,7 @@ if [ ! $# -eq 0 ]; then
         git pull https://github.com/bling/vim-airline ~/.vim/bundle/vim-airline
         git pull https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
         git pull https://github.com/rust-lang/rust.vim.git
+        git pull https://github.com/phildawes/racer.git
     fi
 
     echo "run fc-cache -fv to update fonts";

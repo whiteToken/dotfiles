@@ -1,6 +1,6 @@
 "{{{Misc Settings
 
-" Necesary  for lots of cool vim things
+" Necesary  for lots of cool Vim things
 set nocompatible
 
 " Folding Stuffs
@@ -38,6 +38,8 @@ set backspace=2
 set number
 
 set hidden
+
+set autoread
 "nnoremap JJJJ <Nop>
 
 " Incremental searching is sexy
@@ -57,6 +59,11 @@ if has("gui_running")
     set guioptions-=T
 endif
 " }}}
+
+"{{{Rust Racer
+let g:racer_cmd="~/.vin/bundle/racer/target/release/racer"
+let $RUST_SRC_PATH="/home/chris/gl/rust/src/"
+"}}}
 
 ""{{{Completion Func and Mapping
 
@@ -216,6 +223,8 @@ au BufEnter *.vs set syntax=c
 
 "{{{ Mappings
 
+nnoremap g] :tab tselect <C-r><C-w><CR>
+
 vnoremap <Leader>q :g//exe 'norm @a'<CR>
 
 nnoremap <Leader>d :%s/\s\+$//<CR>
@@ -226,7 +235,8 @@ nnoremap <Leader><F6> :set nospell<CR>
 nnoremap <Leader>6 ^
 nnoremap <Leader>4 $
 
-inoremap jj <Esc>
+"inoremap jj <Esc>
+inoremap <C-j> <Esc>
 inoremap <C-BS> <C-w>
 
 nnoremap dl ^d$
