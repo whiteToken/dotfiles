@@ -60,56 +60,7 @@ if has("gui_running")
 endif
 " }}}
 
-"{{{Rust Racer
-let g:racer_cmd="~/.vin/bundle/racer/target/release/racer"
-let $RUST_SRC_PATH="/home/chris/gl/rust/src/"
-"}}}
-
 ""{{{Completion Func and Mapping
-
-
-"function! Tab_Or_Complete()
-"    if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-"        return "\<C-N>"
-"    else
-"        return "\<Tab>"
-"    endif
-"endfunction
-"
-":inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
-"
-"unl aul  "just for testing
-"autocmd! autoCom
-"
-"if !exists("aul")
-"    let aul = 1
-"    augroup autoCom
-"        au CursorMovedI * exe "norm i\<C-N>"
-"        "au BufAdd * call append(line('.'), "hello")
-"    augroup END
-"endif
-"
-"function! Aucom()
-"    if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-"        return "\<C-N>"
-"    else
-"        return ""
-"    endif
-"endfunction
-
-"let counter = 0
-"inoremap <expr> <C-L> ListItem()
-"inoremap <expr> <C-R> ListReset()
-"
-"func ListItem()
-"  let g:counter += 1
-"  return g:counter . '. '
-"endfunc
-"
-"func ListReset()
-"  let g:counter = 0
-"  return ''
-"endfunc
 
 function! Tab_Or_Complete()
     "if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
@@ -118,16 +69,6 @@ function! Tab_Or_Complete()
     else
         return "\<Tab>"
     endif
-endfunction
-
-function! CxComplete()
-
-    if pumvisible()
-        return ""
-    else
-        return "\<C-X>"
-    endif
-
 endfunction
 
 let s:fileType='.*\.\(cpp\|cu\|c\|h\)'
@@ -142,25 +83,24 @@ function! CnuComplete()
 
 endfunction
 
-function! s:Maping()
-call s:Unmap()
+function! Maping(completion, buffer)
 let s:mapletters = [
     \ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
     \ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
     \ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
     \ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
     \ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-    \ '_' ]
+    \ '_', ':', ]
     for key in s:mapletters
-        "execute printf('inoremap <silent> %s %s<C-r>=<SID>feedPopup()<CR>', key, key)
-        execute 'inoremap ' . key . ' ' . key . '<C-N><C-P>'
-        "execute 'inoremap ' . key . ' ' . key . '<C-R>=CxComplete()<CR><C-R>=CnuComplete()<CR><C-P>'
+        execute 'inoremap ' . a:buffer . key . ' ' . key . a:completion
     endfor
-    "set cot=menu,preview
-    inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+    "inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+    inoremap <expr> <Tab>   pumvisible() ? "\<C-N>" : "\<Tab>"
+    inoremap <expr> <Down>  pumvisible() ? "\<C-N>" : "\<Down>"
+    inoremap <expr> <Up>    pumvisible() ? "\<C-P>" : "\<Up>"
 endfunction
 
-function! s:Unmap()
+function! Unmap()
     if !exists('s:mapletters')
         return
     endif
@@ -170,26 +110,23 @@ function! s:Unmap()
     let s:mapletters = []
 endfunction
 
-call s:Maping()
+call Maping('<C-N><C-P>', '')
 "call s:Unmap()
 
-set conceallevel=2
-set concealcursor=vin
-let g:clang_snippets=1
-let g:clang_conceal_snippets=1
-let g:clang_snippets_engine='clang_complete'
-let g:clang_complete_macros=1
+set completeopt=menuone,preview,noselect,noinsert
 
-" Complete options (disable preview scratch window, longest removed to aways show menu)
-set completeopt=menu,menuone
-
-" Limit popup menu height
 set pumheight=20
 
-" SuperTab completion fall-back
-"let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
-
 " }}}
+
+"{{{Rust Racer
+let g:racer_cmd="~/.vim/racer/target/release/racer"
+let $RUST_SRC_PATH="/home/chris/gl/rust/src/"
+
+" map rust file buffers only with rust omni complete
+au BufRead *.rs call Maping('<C-X><C-O>', '<buffer>')
+
+"}}}
 
 "{{{  C++ code editing functions
 
@@ -226,6 +163,7 @@ au BufEnter *.vs set syntax=c
 nnoremap g] :tab tselect <C-r><C-w><CR>
 
 vnoremap <Leader>q :g//exe 'norm @a'<CR>
+nnoremap <Leader>q :g//exe 'norm @a'<CR>
 
 nnoremap <Leader>d :%s/\s\+$//<CR>
 
@@ -235,8 +173,8 @@ nnoremap <Leader><F6> :set nospell<CR>
 nnoremap <Leader>6 ^
 nnoremap <Leader>4 $
 
-"inoremap jj <Esc>
-inoremap <C-j> <Esc>
+inoremap jj <Esc>
+"inoremap <C-j> <Esc>
 inoremap <C-BS> <C-w>
 
 nnoremap dl ^d$
@@ -251,8 +189,8 @@ nnoremap <Leader>e :tabe ~/.vimrc<CR>
 
 vnoremap <Leader>v <C-v>I
 
-nnoremap / :set hls<CR> /
-nnoremap * :set hls<CR> *
+nnoremap / :set hls<CR>/
+nnoremap * :set hls<CR>*
 nnoremap <F3> :set nohls<CR>
 
 nnoremap gb gT
@@ -310,7 +248,7 @@ nnoremap <Right> gt
 execute pathogen#infect()
 
 "NERDTree stuff
-nnoremap <C-n> :NERDTreeToggle<CR>
+"nnoremap <C-n> :NERDTreeToggle<CR>
 "let g:NERDTreeWinSize = 40
 
 "airline stuff
